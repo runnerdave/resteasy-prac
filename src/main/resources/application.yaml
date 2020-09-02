@@ -1,2 +1,4 @@
 management.endpoints.web.exposure.include: beans,configprops,mappings,env
 server.port: 9000
+
+users.endpoint.v1.url: http://localhost:${server.port}/app/api/v1/users/
