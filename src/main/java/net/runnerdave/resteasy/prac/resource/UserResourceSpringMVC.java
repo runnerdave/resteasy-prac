@@ -14,10 +14,10 @@ import java.util.UUID;
 
 import javax.ws.rs.QueryParam;
 
-//@RestController
-//@RequestMapping(
-//    path = "/api/v1/users"
-//)
+@RestController
+@RequestMapping(
+    path = "/api/v2/users"
+)
 public class UserResourceSpringMVC {
 
     private UserService userService;
