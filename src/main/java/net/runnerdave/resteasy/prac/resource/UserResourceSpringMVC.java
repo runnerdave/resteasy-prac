@@ -6,14 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import javax.validation.Valid;
 import javax.ws.rs.QueryParam;
 
+@Validated
 @RestController
 @RequestMapping(
     path = "/api/v2/users"
@@ -51,7 +54,7 @@ public class UserResourceSpringMVC {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Integer> insertNewUser(@RequestBody User user) {
+    public ResponseEntity<Integer> insertNewUser(@Valid @RequestBody User user) {
         int result = userService.insertUser(user);
         return getIntegerResponseEntity(result);
     }

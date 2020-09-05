@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -22,8 +23,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
 @Validated
 @Component
@@ -56,7 +55,7 @@ public class UserResourceResteasy {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public void insertNewUser(User user) {
+    public void insertNewUser(@Valid User user) {
         userService.insertUser(user);
     }
 
@@ -72,13 +71,6 @@ public class UserResourceResteasy {
     @Path("{userUid}")
     public void deleteUser(@PathParam("userUid") UUID userUid) {
         userService.removeUser(userUid);
-    }
-
-    private Response getIntegerResponseEntity(int result) {
-        if (result == 1) {
-            return Response.ok().build();
-        }
-        return Response.status(Status.BAD_REQUEST).build();
     }
 
 }
