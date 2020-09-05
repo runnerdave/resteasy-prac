@@ -1,0 +1,325 @@
+{
+	"info": {
+		"_postman_id": "b0b219d2-561b-43ce-a059-5c1fc233e388",
+		"name": "resteasy-prac",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get users resteasy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/app/api/v1/users/?gender=male",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"app",
+						"api",
+						"v1",
+						"users",
+						""
+					],
+					"query": [
+						{
+							"key": "gender",
+							"value": "male",
+							"description": "remove to get both genders"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get users spring mvc",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/api/v2/users/?gender=female",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"v2",
+						"users",
+						""
+					],
+					"query": [
+						{
+							"key": "gender",
+							"value": "female",
+							"description": "remove to get both genders"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user resteasy",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"userUid\": \"5d25189f-488a-44ae-93d6-d7ca620bcb4f\",\n        \"firstName\": \"Joe\",\n        \"lastName\": \"Jones\",\n        \"gender\": \"FEMALE\",\n        \"age\": 23,\n        \"email\": \"joe.jones@gmail.com\",\n        \"fullName\": \"Joe Jones\",\n        \"dateOfBirth\": 1998\n    }"
+				},
+				"url": {
+					"raw": "http://localhost:9000/app/api/v1/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"app",
+						"api",
+						"v1",
+						"users",
+						""
+					]
+				},
+				"description": "Make sure to fetch the user id first"
+			},
+			"response": []
+		},
+		{
+			"name": "Update user spring mvc",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"userUid\": \"5d25189f-488a-44ae-93d6-d7ca620bcb4f\",\n        \"firstName\": \"Joe\",\n        \"lastName\": \"Jones\",\n        \"gender\": \"MALE\",\n        \"age\": 24,\n        \"email\": \"joe.jones@gmail.com\",\n        \"fullName\": \"Joe Jones\",\n        \"dateOfBirth\": 1998\n    }"
+				},
+				"url": {
+					"raw": "http://localhost:9000/api/v2/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"v2",
+						"users",
+						""
+					]
+				},
+				"description": "Make sure to fetch the user id first"
+			},
+			"response": []
+		},
+		{
+			"name": "Get single user resteasy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/app/api/v1/users/5d25189f-488a-44ae-93d6-d7ca620bcb4f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"app",
+						"api",
+						"v1",
+						"users",
+						"5d25189f-488a-44ae-93d6-d7ca620bcb4f"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get single user spring mvc",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/api/v2/users/5d25189f-488a-44ae-93d6-d7ca620bcb4f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"v2",
+						"users",
+						"5d25189f-488a-44ae-93d6-d7ca620bcb4f"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post user resteasy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"firstName\": \"Jo\",\n        \"lastName\": \"Lucas\",\n        \"gender\": \"FEMALE\",\n        \"age\": 22,\n        \"email\": \"jo.lucas@gmail.com\"\n    }"
+				},
+				"url": {
+					"raw": "http://localhost:9000/app/api/v1/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"app",
+						"api",
+						"v1",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post user spring mvc",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"Jose\",\n    \"lastName\": \"Lucas\",\n    \"gender\": \"MALE\",\n    \"age\": 22,\n    \"email\": \"jose.lucas@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9000/api/v2/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"v2",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user resteasy",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"firstName\": \"Jo\",\n        \"lastName\": \"Lucas\",\n        \"gender\": \"FEMALE\",\n        \"age\": 22,\n        \"email\": \"jo.lucas@gmail.com\"\n    }"
+				},
+				"url": {
+					"raw": "http://localhost:9000/app/api/v1/users/5a6a6d64-0bca-42d3-b511-480bfbfd17ca",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"app",
+						"api",
+						"v1",
+						"users",
+						"5a6a6d64-0bca-42d3-b511-480bfbfd17ca"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user spring mvc",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"firstName\": \"Jo\",\n        \"lastName\": \"Lucas\",\n        \"gender\": \"FEMALE\",\n        \"age\": 22,\n        \"email\": \"jo.lucas@gmail.com\"\n    }"
+				},
+				"url": {
+					"raw": "http://localhost:9000/api/v2/users/0f2e1550-265c-4e09-b73b-ad2a47a8212a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"v2",
+						"users",
+						"0f2e1550-265c-4e09-b73b-ad2a47a8212a"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
