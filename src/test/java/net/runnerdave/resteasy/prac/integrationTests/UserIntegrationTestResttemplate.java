@@ -1,6 +1,7 @@
 package net.runnerdave.resteasy.prac.integrationTests;
 
 import net.runnerdave.resteasy.prac.model.User;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,11 +23,23 @@ public class UserIntegrationTestResttemplate {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    ParameterizedTypeReference<List<User>> personList = new ParameterizedTypeReference<List<User>>() {
+    };
+
+    @BeforeEach
+    public void setUp() throws Exception {
+        ResponseEntity<List<User>> response = restTemplate.exchange("/app/api/v1/users", GET, null, personList);
+        if (response.getBody().size() == 0) {
+            User userToInsert = new User(null, "Joe", "Jones",
+                    User.Gender.MALE, 22, "joe.jones@gmail.com");
+            HttpEntity<User> entity = new HttpEntity<>(userToInsert, null);
+            ResponseEntity<User> insertUserResponse = restTemplate
+                    .exchange("/app/api/v1/users", POST, entity, User.class, 1);
+        }
+    }
+
     @Test
     public void itShouldIntegrateAllMethodsInUserEndpoint() throws Exception {
-
-        ParameterizedTypeReference<List<User>> personList = new ParameterizedTypeReference<List<User>>() {
-        };
 
         // GET - ALL USERS
         ResponseEntity<List<User>> response = restTemplate.exchange("/app/api/v1/users", GET, null, personList);
@@ -63,7 +76,6 @@ public class UserIntegrationTestResttemplate {
         assertThat(updateUserByIdResponse.getStatusCode()).isEqualTo(NO_CONTENT);
 
 
-
         // POST - INSERT NEW USER
         User userToInsert = new User(null, "Nelson", "Mandela", User.Gender.MALE, 33, "nelson.mandela@gmail.com");
         entity = new HttpEntity<>(userToInsert, null);
@@ -76,10 +88,18 @@ public class UserIntegrationTestResttemplate {
                 personList);
         assertThat(response.getBody()).hasSize(2);
         assertThat(response.getStatusCode()).isEqualTo(OK);
-        assertThat(response.getBody().get(1)).isEqualToComparingFieldByField(userToUpdate);
-        assertThat(response.getBody().get(0)).isEqualToIgnoringNullFields(userToInsert);
+        User user0 = response.getBody().get(0);
+        User user1 = response.getBody().get(1);
+        if (user0.getUserUid() == userToUpdate.getUserUid()) {
+            assertThat(user0).isEqualToComparingFieldByField(userToUpdate);
+            assertThat(user1).isEqualToComparingFieldByField(userToInsert);
+        }
+        if (user1.getUserUid() == userToUpdate.getUserUid()) {
+            assertThat(user1).isEqualToComparingFieldByField(userToUpdate);
+            assertThat(user0).isEqualToComparingFieldByField(userToInsert);
+        }
 
-        // DELETE - USER BY ID=1
+        // DELETE - USER BY
         ResponseEntity<String> deleteUserResponse = restTemplate
                 .exchange("/app/api/v1/users/" + uuid, DELETE, null, String.class);
         assertThat(deleteUserResponse.getStatusCode()).isEqualTo(NO_CONTENT);
